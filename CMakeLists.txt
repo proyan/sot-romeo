@@ -37,7 +37,7 @@ SET(PKG_CONFIG_ADDITIONAL_VARIABLES
 SETUP_PROJECT()
 
 # Search for dependencies.
-ADD_REQUIRED_DEPENDENCY("romeo")
+ADD_REQUIRED_DEPENDENCY("romeo >= 1.1")
 
 # Add subdirectories.
 ADD_SUBDIRECTORY(src)
