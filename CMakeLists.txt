@@ -19,7 +19,6 @@ INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/lapack.cmake)
 INCLUDE(cmake/cpack.cmake)
-INCLUDE(cmake/ros.cmake)
 
 SET(PROJECT_NAME sot-romeo)
 SET(PROJECT_DESCRIPTION "dynamic-graph package for Romeo robot")
@@ -38,29 +37,7 @@ SET(PKG_CONFIG_ADDITIONAL_VARIABLES
 SETUP_PROJECT()
 
 # Search for dependencies.
-ADD_REQUIRED_DEPENDENCY("jrl-mathtools")
-ADD_REQUIRED_DEPENDENCY("jrl-mal >= 1.9.0")
-
-ADD_REQUIRED_DEPENDENCY("jrl-dynamics >= 1.19.0")
 ADD_REQUIRED_DEPENDENCY("romeo")
-
-ADD_REQUIRED_DEPENDENCY("dynamic-graph")
-ADD_REQUIRED_DEPENDENCY("sot-core")
-ADD_REQUIRED_DEPENDENCY("sot-dynamic")
-ADD_REQUIRED_DEPENDENCY("dynamic-graph-python")
-
-ADD_ROSPACK_DEPENDENCY("dynamic_graph_bridge")
-# Search for dependencies.
-# Boost
-SET(BOOST_COMPONENTS filesystem system)
-SEARCH_FOR_BOOST()
-
-# Handle rpath necessary to handle ROS multiplace packages
-# libraries inclusion
-SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
-SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 # Add subdirectories.
 ADD_SUBDIRECTORY(src)
