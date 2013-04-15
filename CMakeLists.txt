@@ -39,6 +39,12 @@ SETUP_PROJECT()
 # Search for dependencies.
 ADD_REQUIRED_DEPENDENCY("romeo >= 1.1")
 
+# Those packages are not directly linked, but are used in the 
+#  python scripts
+ADD_REQUIRED_DEPENDENCY("sot-core >= 2.7")
+ADD_REQUIRED_DEPENDENCY("sot-tools")
+ADD_REQUIRED_DEPENDENCY("sot-dynamic >= 2.6")
+
 # Add subdirectories.
 ADD_SUBDIRECTORY(src)
 
