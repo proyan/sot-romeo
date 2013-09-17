@@ -37,7 +37,7 @@ SET(PKG_CONFIG_ADDITIONAL_VARIABLES
 SETUP_PROJECT()
 
 # Search for dependencies.
-ADD_REQUIRED_DEPENDENCY("romeo >= 1.1")
+ADD_REQUIRED_DEPENDENCY("romeo >= 1.1.1")
 
 # Those packages are not directly linked, but are used in the 
 #  python scripts

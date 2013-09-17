@@ -27,7 +27,7 @@ import numpy as np
 from dynamic_graph.sot.dynamics.humanoid_robot import AbstractHumanoidRobot
 from dynamic_graph.sot.dynamics import Dynamic
 
-romeo_pkgdatarootdir = "@ROMEO_PKGDATAROOTDIR@"
+romeo_pkgdatarootdir = "@ROMEO_PKGDATAROOTDIR@/romeo"
 
 class Robot (AbstractHumanoidRobot):
     """
