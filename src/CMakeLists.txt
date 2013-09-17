@@ -17,7 +17,7 @@ INCLUDE(../cmake/python.cmake)
 FINDPYTHON()
 INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
 
-CONFIG_FILES(dynamic_graph/sot/romeo/romeo.py)
+CONFIG_FILES(dynamic_graph/sot/romeo/robot.py)
 
 # Install Python files.
 SET(PYTHON_MODULE_DIR
@@ -27,8 +27,7 @@ SET(PYTHON_MODULE_BUILD_DIR
 
 SET(PYTHON_MODULE dynamic_graph/sot/romeo)
 PYTHON_INSTALL_ON_SITE("${PYTHON_MODULE}" "__init__.py" )
-PYTHON_INSTALL_BUILD("${PYTHON_MODULE}" "romeo.py" "${PYTHON_SITELIB}")
-SET(FILES __init__.py romeo.py)
-
+PYTHON_INSTALL_ON_SITE("${PYTHON_MODULE}" "prologue.py" )
+PYTHON_INSTALL_BUILD("${PYTHON_MODULE}" "robot.py" "${PYTHON_SITELIB}")
 
 
