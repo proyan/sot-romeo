@@ -36,9 +36,6 @@ SET(PKG_CONFIG_ADDITIONAL_VARIABLES
 
 SETUP_PROJECT()
 
-# Search for dependencies.
-ADD_REQUIRED_DEPENDENCY("romeo >= 1.1.1")
-
 # Those packages are not directly linked, but are used in the 
 #  python scripts
 ADD_REQUIRED_DEPENDENCY("sot-core >= 2.7")
