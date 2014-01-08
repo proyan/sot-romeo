@@ -24,13 +24,14 @@ class Robot (AbstractHumanoidRobot):
     """
     halfSitting = (
         0, 0, 0.840252, 0, 0, 0,                         # Free flyer
-        0,                                               # chest
-        0, 0, 0, 0,                                      # head
-        1.5, 0.6, -0.5, -1.05, -0.4, -0.3, -0.2,         # left arm   
-        1.5, -0.6, 0.5, 1.05, -0.4, -0.3, -0.2,          # right arm  
-        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   # left leg   
-        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   # right leg
-        0, 0 ,0 ,0)                                      # eyes
+        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   #  Left leg
+        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   #  Right leg
+        0,                                               #  Trunk
+        1.5, 0.6, -0.5, -1.05, -0.4, -0.3, -0.2,         #   Left arm
+        0, 0, 0, 0,                                      #   Head
+        0, 0 ,0 ,0,                                      #    Eyes
+        1.5, -0.6, 0.5, 1.05, -0.4, -0.3, -0.2,          #   Right arm
+    )
 
 #    def smallToFull(self, config):
 #        res = (config + 12*(0.,))
@@ -54,5 +55,4 @@ class Robot (AbstractHumanoidRobot):
             raise RuntimeError("invalid half-sitting pose")
         self.initializeRobot()
 
-# TODO: ??
-# __all__ = [Romeo]
+__all__ = ["Robot"]
