@@ -50,6 +50,12 @@ class Robot (AbstractHumanoidRobot):
         self.dynamic.addJointMapping('BODY', 'body')
         self.dynamic.loadFromParameterServer()
 
+        # complete feet position (TODO: move it into srdf file)
+        ankle =self.dynamic.getAnklePositionInFootFrame()
+        self.dynamic.setFootParameters(True , 0.1935, 0.121, ankle)
+        self.dynamic.setFootParameters(False, 0.1935, 0.121, ankle)
+
+        # check half sitting size
         self.dimension = self.dynamic.getDimension()
         if self.dimension != len(self.halfSitting):
             raise RuntimeError("invalid half-sitting pose")
