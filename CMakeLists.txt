@@ -17,8 +17,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
-INCLUDE(cmake/lapack.cmake)
 INCLUDE(cmake/cpack.cmake)
+INCLUDE(cmake/ros.cmake)
 
 SET(PROJECT_NAME sot-romeo)
 SET(PROJECT_DESCRIPTION "dynamic-graph package for Romeo robot")
@@ -38,12 +38,28 @@ SETUP_PROJECT()
 
 # Those packages are not directly linked, but are used in the 
 #  python scripts
+ADD_REQUIRED_DEPENDENCY("dynamic-graph")
+ADD_REQUIRED_DEPENDENCY("dynamic-graph-python")
 ADD_REQUIRED_DEPENDENCY("sot-core >= 2.7")
 ADD_REQUIRED_DEPENDENCY("sot-tools")
 ADD_REQUIRED_DEPENDENCY("sot-dynamic >= 2.6")
 
+ADD_ROSPACK_DEPENDENCY("dynamic_graph_bridge")
+# Search for dependencies.
+# Boost
+SET(BOOST_COMPONENTS filesystem system thread)
+SEARCH_FOR_BOOST()
+
+# Handle rpath necessary to handle ROS multiplace packages
+# libraries inclusion
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 # Add subdirectories.
 ADD_SUBDIRECTORY(src)
+#ADD_SUBDIRECTORY(python)
 
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
