@@ -41,6 +41,10 @@ class Robot (AbstractHumanoidRobot):
                  device = None,
                  tracer = None):
         AbstractHumanoidRobot.__init__ (self, name, tracer)
+        self.urdfDir  = 'package://romeo_description/urdf/'
+        self.urdfName = 'romeo_small.urdf'
+
+
         self.OperationalPoints.append('waist')
         self.OperationalPoints.append('chest')
         self.device = device
@@ -52,8 +56,11 @@ class Robot (AbstractHumanoidRobot):
 
         # complete feet position (TODO: move it into srdf file)
         ankle =self.dynamic.getAnklePositionInFootFrame()
-        self.dynamic.setFootParameters(True , 0.1935, 0.121, ankle)
-        self.dynamic.setFootParameters(False, 0.1935, 0.121, ankle)
+        self.ankleLength = 0.1935
+        self.ankleWidth  = 0.121
+
+        self.dynamic.setFootParameters(True , self.ankleLength, self.ankleWidth, ankle)
+        self.dynamic.setFootParameters(False, self.ankleLength, self.ankleWidth, ankle)
 
         # check half sitting size
         self.dimension = self.dynamic.getDimension()
