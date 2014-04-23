@@ -33,10 +33,6 @@ class Robot (AbstractHumanoidRobot):
         1.5, -0.6, 0.5, 1.05, -0.4, -0.3, -0.2,          #   Right arm
     )
 
-#    def smallToFull(self, config):
-#        res = (config + 12*(0.,))
-#        return res
-
     def __init__(self, name, 
                  device = None,
                  tracer = None):
@@ -52,7 +48,7 @@ class Robot (AbstractHumanoidRobot):
         # correct the name of the body link
         self.dynamic = RosRobotModel("{0}_dynamic".format(name))
         self.dynamic.addJointMapping('BODY', 'body')
-        self.dynamic.loadFromParameterServer()
+        self.dynamic.loadUrdf(self.urdfDir + self.urdfName)
 
         # complete feet position (TODO: move it into srdf file)
         ankle =self.dynamic.getAnklePositionInFootFrame()
