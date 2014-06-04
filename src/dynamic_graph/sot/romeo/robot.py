@@ -33,6 +33,9 @@ class Robot (AbstractHumanoidRobot):
         1.5, -0.6, 0.5, 1.05, -0.4, -0.3, -0.2,          #   Right arm
     )
 
+    jointMap = { }
+    jointMap['BODY'] = 'body'
+
     def __init__(self, name, 
                  device = None,
                  tracer = None):
@@ -47,7 +50,8 @@ class Robot (AbstractHumanoidRobot):
 
         # correct the name of the body link
         self.dynamic = RosRobotModel("{0}_dynamic".format(name))
-        self.dynamic.addJointMapping('BODY', 'body')
+        for i in self.jointMap:
+            self.dynamic.addJointMapping(i, self.jointMap[i])
         self.dynamic.loadUrdf(self.urdfDir + self.urdfName)
 
         # complete feet position (TODO: move it into srdf file)
