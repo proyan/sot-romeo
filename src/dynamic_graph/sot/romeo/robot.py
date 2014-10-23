@@ -22,15 +22,148 @@ class Robot (AbstractHumanoidRobot):
     """
     This class instanciates Aldebaran Romeo robot
     """
-    halfSitting = (
-        0, 0, 0.840252, 0, 0, 0,                         # Free flyer
-        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   #  Left leg
-        0, 0, -0.3490658, 0.6981317, -0.3490658, 0, 0,   #  Right leg
-        0,                                               #  Trunk
-        1.5, 0.6, -0.5, -1.05, -0.4, -0.3, -0.2,         #   Left arm
-        0, 0, 0, 0,                                      #   Head
-        0, 0 ,0 ,0,                                      #    Eyes
-        1.5, -0.6, 0.5, 1.05, -0.4, -0.3, -0.2,          #   Right arm
+    # half sitting position for the given romeo_small urdf model
+    # coordinates should be given in depth 
+    # moreover, we do not consider fixed joint
+    halfSittingSmall = (
+        # Free flyer
+        0, 0, 0.840252, 0, 0, 0,
+        # ImuTorsoAccelerometer_joint
+        #0.0,
+        # ImuTorsoGyrometer_joint
+        #0.0,
+        # LHipYaw, LHipRoll, LHipPtch, LKneePitch, LAnklePitch, L_AnkleRoll
+        0.0, 0.0, -0.3490658, 0.6981317, -0.3490658, 0.0,
+        # LFsrCenterJoint, LFsrFL_joint, LFsrFR_joint, LFsrRCenter_joint,
+        #0.0, 0.0, 0.0, 0.0,
+        # l_sole_joint
+        #0.0, 
+        # RHipYaw, RHipRoll, RHipPtch, RKneePitch, RAnklePitch, R_AnkleRoll
+        0.0, 0.0, -0.3490658, 0.6981317, -0.3490658, 0.0,
+        # RFsrCenterJoint, RFsrFL_joint, RFsrFR_joint, RFsrRCenter_joint,
+        #0.0, 0.0, 0.0, 0.0,
+        # r_sole_joint
+        #0.0,
+        # TrunkYaw
+        0.0,
+        # LShoulderPitch, LShoulderYaw, LElbowRoll, LElbowYaw, 
+        1.5, 0.6, -0.5, -1.05,
+        # LWristRoll, LWristYaw, LWristPitch,
+        -0.4, -0.3, -0.2,
+        # LFinger21, LFinger22, LFinger23
+        #0.0, 0.0, 0.0,
+        # LFinger31, LFinger32, LFinger33,
+        #0.0, 0.0, 0.0, 
+        # LHand,
+        #0.0,
+        # LFinger12, LFinger13
+        #0.0, 0.0,
+        # LThumb1, LThumb2, LThumb3
+        #0.0, 0.0, 0.0,
+        # l_gripper_joint
+        #0.0,
+        # NeckYaw, NeckPitch, 
+        0.0, 0.0,
+        # HeadPitch, HeadRoll
+        0.0, 0.0, 
+        # CameraDepth_joint, 
+        #0.0,
+        # CameraLeftEye_joint, CameraLeft_joint, 
+        #0.0, 0.0,
+        # CameraRightEye_joint, CameraRight_joint,
+        #0.0, 0.0,
+        # HeadTouchFront_joint, HeadTouchMiddle_joint
+        #0.0, 0.0,
+        # ImuHeadAccelerometer_joint, ImuHeadGyrometer_joint
+        #0.0, 0.0,
+        # gaze_joint
+        #0.0,
+        # RShoulderPitch, RShoulderYaw, RElbowRoll, RElbowYaw, 
+        1.5, -0.6, 0.5, 1.05,
+        # RWristRoll, RWristYaw, RWristPitch,
+        -0.4, -0.3, -0.2,
+        # RFinger21, RFinger22, RFinger23
+        #0.0, 0.0, 0.0,
+        # RFinger31, RFinger32, RFinger33,
+        #0.0, 0.0, 0.0,
+        # RHand,
+        #0.0,  
+        #  RFinger12, RFinger13
+        # 0.0, 0.0, 
+        # RThumb1, RThumb2, RThumb3
+        #0.0, 0.0, 0.0,
+        # r_gripper_joint
+        #0.0,
+    )
+
+    # half sitting position for the romeo urdf model
+    # coordinates should be given in depth 
+    # moreover, we do not consider fixed joint
+    halfSittingAll = (
+        # Free flyer
+        0, 0, 0.840252, 0, 0, 0,
+        # ImuTorsoAccelerometer_joint
+        #0.0,
+        # ImuTorsoGyrometer_joint
+        #0.0,
+        # LHipYaw, LHipRoll, LHipPtch, LKneePitch, LAnklePitch, L_AnkleRoll
+        0.0, 0.0, -0.3490658, 0.6981317, -0.3490658, 0.0,
+        # LFsrCenterJoint, LFsrFL_joint, LFsrFR_joint, LFsrRCenter_joint,
+        #0.0, 0.0, 0.0, 0.0,
+        # l_sole_joint
+        #0.0, 
+        # RHipYaw, RHipRoll, RHipPtch, RKneePitch, RAnklePitch, R_AnkleRoll
+        0.0, 0.0, -0.3490658, 0.6981317, -0.3490658, 0.0,
+        # RFsrCenterJoint, RFsrFL_joint, RFsrFR_joint, RFsrRCenter_joint,
+        #0.0, 0.0, 0.0, 0.0,
+        # r_sole_joint
+        #0.0,
+        # TrunkYaw
+        0.0,
+        # LShoulderPitch, LShoulderYaw, LElbowRoll, LElbowYaw, 
+        1.5, 0.6, -0.5, -1.05,
+        # LWristRoll, LWristYaw, LWristPitch,
+        -0.4, -0.3, -0.2,
+        # LFinger21, LFinger22, LFinger23
+        0.0, 0.0, 0.0,
+        # LFinger31, LFinger32, LFinger33,
+        0.0, 0.0, 0.0, 
+        # LHand, LFinger12, LFinger13
+        0.0, 0.0, 0.0,
+        # LThumb1, LThumb2, LThumb3
+        0.0, 0.0, 0.0,
+        # l_gripper_joint
+        #0.0,
+        # NeckYaw, NeckPitch, 
+        0.0, 0.0,
+        # HeadPitch, HeadRoll
+        0.0, 0.0, 
+        # CameraDepth_joint, 
+        #0.0,
+        # CameraLeftEye_joint, CameraLeft_joint, 
+        #0.0, 0.0,
+        # CameraRightEye_joint, CameraRight_joint,
+        #0.0, 0.0,
+        # HeadTouchFront_joint, HeadTouchMiddle_joint
+        #0.0, 0.0,
+        # ImuHeadAccelerometer_joint, ImuHeadGyrometer_joint
+        #0.0, 0.0,
+        # gaze_joint
+        #0.0,
+        # RShoulderPitch, RShoulderYaw, RElbowRoll, RElbowYaw, 
+        1.5, -0.6, 0.5, 1.05,
+        # RWristRoll, RWristYaw, RWristPitch,
+        -0.4, -0.3, -0.2,
+        # RFinger21, RFinger22, RFinger23
+        0.0, 0.0, 0.0,
+        # RFinger31, RFinger32, RFinger33,
+        0.0, 0.0, 0.0,
+        # RHead, RFinger12, RFinger13
+        0.0, 0.0, 0.0, 
+        # RThumb1, RThumb2, RThumb3
+        0.0, 0.0, 0.0,
+        # r_gripper_joint
+        #0.0,
     )
 
     jointMap = { }
@@ -40,9 +173,20 @@ class Robot (AbstractHumanoidRobot):
                  device = None,
                  tracer = None):
         AbstractHumanoidRobot.__init__ (self, name, tracer)
-        self.urdfDir  = 'package://romeo_description/urdf/'
-        self.urdfName = 'romeo_small.urdf'
 
+        print "You ask for "
+        print name
+        print ". "
+        if name == 'romeo_small':
+            print "Loaded model is romeo_small.urdf."
+            self.urdfDir  = 'package://romeo_description/urdf/'
+            self.urdfName = 'romeo_small.urdf'
+            self.halfSitting = self.halfSittingSmall
+        else:
+            print "Loaded model is romeo.urdf."
+            self.urdfDir  = 'package://romeo_description/urdf/'
+            self.urdfName = 'romeo.urdf'
+            self.halfSitting = self.halfSittingAll
 
         self.OperationalPoints.append('waist')
         self.OperationalPoints.append('chest')
