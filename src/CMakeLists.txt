@@ -43,7 +43,7 @@ COMPILE_PLUGIN(dynamic-romeo dynamic-romeo.cpp DynamicRomeo)
 
 
 ## 
-CONFIG_FILES(dynamic_graph/sot/romeo/robot.py)
+##CONFIG_FILES(dynamic_graph/sot/romeo/robot.py)
 
 # Install Python files.
 SET(PYTHON_MODULE_DIR
