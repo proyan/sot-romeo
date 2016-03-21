@@ -17,6 +17,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
+INCLUDE(cmake/eigen.cmake)
 INCLUDE(cmake/cpack.cmake)
 INCLUDE(cmake/ros.cmake)
 
@@ -49,6 +50,7 @@ ADD_ROSPACK_DEPENDENCY("dynamic_graph_bridge")
 # Boost
 SET(BOOST_COMPONENTS filesystem system thread)
 SEARCH_FOR_BOOST()
+SEARCH_FOR_EIGEN()
 
 # Handle rpath necessary to handle ROS multiplace packages
 # libraries inclusion

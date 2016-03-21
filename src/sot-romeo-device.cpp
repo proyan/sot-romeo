@@ -33,7 +33,7 @@ SoTRomeoDevice::SoTRomeoDevice(std::string RobotName):
 {
   sotDEBUGIN(25) ;
   signalRegistration (robotState_);
-  ml::Vector data (3); data.setZero ();
+  dg::Vector data (3); data.setZero ();
   baseff_.resize(12);
 
   using namespace dynamicgraph::command;
@@ -160,13 +160,13 @@ void SoTRomeoDevice::getControl(map<string,dgsot::ControlValues> &controlOut)
   int time = controlSIN.getTime ();
   zmpSIN.recompute (time + 1);
   // Express ZMP in free flyer reference frame
-  ml::Vector zmpGlobal (4);
+  dg::Vector zmpGlobal (4);
   for (unsigned int i = 0; i < 3; ++i)
     zmpGlobal(i) = zmpSIN(time + 1)(i);
   zmpGlobal(3) = 1.;
   dgsot::MatrixHomogeneous inversePose;
-  freeFlyerPose().inverse(inversePose);
-  ml::Vector localZmp = inversePose * zmpGlobal;
+  inversePose = freeFlyerPose().inverse(Eigen::Affine);
+  dg::Vector localZmp(4); localZmp = inversePose.matrix() * zmpGlobal;
   vector<double> ZMPRef(3);
   for(unsigned int i=0;i<3;++i)
     ZMPRef[i] = localZmp(i);

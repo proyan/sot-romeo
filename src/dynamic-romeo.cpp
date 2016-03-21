@@ -32,10 +32,10 @@ namespace dynamicgraph
     {
 
       DynamicRomeo::DynamicRomeo (const std::string & name)
-	: Dynamic (name, false)
+	: Dynamic (name)
       {
 	sotDEBUGIN(15);
-	DynamicRomeo::buildModel ();
+	DynamicRomeo::createRobot();
 	sotDEBUGOUT(15);
       }
 

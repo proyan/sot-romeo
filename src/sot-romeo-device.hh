@@ -24,9 +24,10 @@
 #include <dynamic-graph/linear-algebra.h>
 #include <sot/core/device.hh>
 #include <sot/core/abstract-sot-external-interface.hh>
-#include <sot/core/matrix-rotation.hh>
+#include <sot/core/matrix-geometry.hh>
 
 namespace dgsot=dynamicgraph::sot;
+namespace dg=dynamicgraph;
 
 class SoTRomeoDevice: public 
 dgsot::Device
@@ -63,7 +64,7 @@ protected:
   double timestep_;
   
   /// \brief Previous robot configuration.
-  maal::boost::Vector previousState_;
+  dg::Vector previousState_;
   
   /// \brief Robot state provided by OpenHRP.
   ///
@@ -71,10 +72,10 @@ protected:
   /// account the stabilization step. Therefore, this usually
   /// does *not* match the state control input signal.
   ///
-  dynamicgraph::Signal<ml::Vector, int> robotState_;
+  dg::Signal<dg::Vector, int> robotState_;
 
   /// Intermediate variables to avoid allocation during control
-  ml::Vector mlRobotState;
+  dg::Vector mlRobotState;
   std::vector<double> baseff_;
 };
 #endif /* _SOT_RomeoDevice_H_*/
