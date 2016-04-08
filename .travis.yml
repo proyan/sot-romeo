@@ -1,4 +1,5 @@
 language: cpp
+sudo: required
 compiler: gcc
 env:
   global:
@@ -13,13 +14,14 @@ env:
     ros-hydro-ros-base
     ros-hydro-tf
     ros-hydro-urdf
+    ros-hydro-urdfdom
     ros-hydro-urdfdom-py"
-  - GIT_DEPENDENCIES="jrl-umi3218/jrl-mathtools jrl-umi3218/jrl-mal laas/abstract-robot-dynamics jrl-umi3218/jrl-dynamics
-    stack-of-tasks/dynamic-graph stack-of-tasks/dynamic-graph-python stack-of-tasks/sot-core
-    stack-of-tasks/sot-tools stack-of-tasks/sot-dynamic 
-    francois-keith/jrl_dynamics_urdf:topic/fixed_joints"
+  - GIT_DEPENDENCIES="stack-of-tasks/pinocchio:devel
+    proyan/dynamic-graph proyan/dynamic-graph-python proyan/sot-core
+    proyan/sot-tools proyan/sot-dynamic:topic/sot-pinocchio 
+    proyan/dynamic_graph_python"
   - ROS_VERSION=hydro
-  - ROS_GIT_DEPENDENCIES="francois-keith/dynamic_graph_bridge_msgs:catkin francois-keith/dynamic_graph_bridge:catkin laas:romeo"
+  - ROS_GIT_DEPENDENCIES="stack-of-tasks/dynamic_graph_bridge_msgs:catkin proyam/dynamic_graph_bridge:catkin laas:romeo"
   - ALLOW_CATKINLINT_FAILURE=true
 notifications:
   email:
