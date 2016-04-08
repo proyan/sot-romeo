@@ -17,6 +17,8 @@
 from dynamic_graph.sot.dynamics.humanoid_robot import AbstractHumanoidRobot
 from dynamic_graph.ros import RosRobotModel
 
+from rospkg import RosPack
+
 # Sot model for the romeo_small.urdf (with gripper, no fingers)
 class Robot (AbstractHumanoidRobot):
     """
@@ -174,22 +176,28 @@ class Robot (AbstractHumanoidRobot):
                  tracer = None):
         AbstractHumanoidRobot.__init__ (self, name, tracer)
 
-        print "You ask for "
-        print name
-        print ". "
+        print "You ask for ", name, ". "
+        rospack = RosPack()
+        self.urdfDir = rospack.get_path('romeo_description') + '/urdf/'
         if name == 'romeo_small':
             print "Loaded model is romeo_small.urdf."
-            self.urdfDir  = 'package://romeo_description/urdf/'
             self.urdfName = 'romeo_small.urdf'
             self.halfSitting = self.halfSittingSmall
         else:
             print "Loaded model is romeo.urdf."
-            self.urdfDir  = 'package://romeo_description/urdf/'
             self.urdfName = 'romeo.urdf'
             self.halfSitting = self.halfSittingAll
 
         self.OperationalPoints.append('waist')
         self.OperationalPoints.append('chest')
+        self.OperationalPointsMap = {'left-wrist'  : 'LWristPitch',
+                                     'right-wrist' : 'RWristPitch',
+                                     'left-ankle'  : 'LAnkleRoll',
+                                     'right-ankle' : 'RAnkleRoll',
+                                     'gaze'        : 'gaze_joint',
+                                     'waist'       : 'waist',
+                                     'chest'       : 'TrunkYaw'}
+        
         self.device = device
 
         # correct the name of the body link
@@ -199,17 +207,19 @@ class Robot (AbstractHumanoidRobot):
         self.dynamic.loadUrdf(self.urdfDir + self.urdfName)
 
         # complete feet position (TODO: move it into srdf file)
-        ankle =self.dynamic.getAnklePositionInFootFrame()
-        self.ankleLength = 0.1935
-        self.ankleWidth  = 0.121
+        #ankle =self.dynamic.getAnklePositionInFootFrame()
+        #self.ankleLength = 0.1935
+        #self.ankleWidth  = 0.121
 
-        self.dynamic.setFootParameters(True , self.ankleLength, self.ankleWidth, ankle)
-        self.dynamic.setFootParameters(False, self.ankleLength, self.ankleWidth, ankle)
+        #self.dynamic.setFootParameters(True , self.ankleLength, self.ankleWidth, ankle)
+        #self.dynamic.setFootParameters(False, self.ankleLength, self.ankleWidth, ankle)
 
         # check half sitting size
         self.dimension = self.dynamic.getDimension()
         if self.dimension != len(self.halfSitting):
-            raise RuntimeError("invalid half-sitting pose")
+            
+            raise RuntimeError("invalid half-sitting pose. HalfSitting Dimension:", 
+                               len(self.halfSitting), " .Robot Dimension:", self.dimension)
         self.initializeRobot()
 
 __all__ = ["Robot"]

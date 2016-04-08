@@ -39,11 +39,11 @@ SETUP_PROJECT()
 
 # Those packages are not directly linked, but are used in the 
 #  python scripts
-ADD_REQUIRED_DEPENDENCY("dynamic-graph")
-ADD_REQUIRED_DEPENDENCY("dynamic-graph-python")
-ADD_REQUIRED_DEPENDENCY("sot-core >= 2.7")
+ADD_REQUIRED_DEPENDENCY("dynamic-graph >= 3.0")
+ADD_REQUIRED_DEPENDENCY("dynamic-graph-python >=3.0")
+ADD_REQUIRED_DEPENDENCY("sot-core >= 3.0")
 ADD_REQUIRED_DEPENDENCY("sot-tools")
-ADD_REQUIRED_DEPENDENCY("sot-dynamic >= 2.6")
+ADD_REQUIRED_DEPENDENCY("sot-dynamic >= 3.1")
 
 ADD_ROSPACK_DEPENDENCY("dynamic_graph_bridge")
 # Search for dependencies.
