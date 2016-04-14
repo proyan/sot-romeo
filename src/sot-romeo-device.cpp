@@ -173,15 +173,23 @@ void SoTRomeoDevice::getControl(map<string,dgsot::ControlValues> &controlOut)
 
   controlOut["zmp"].setName("zmp");
   controlOut["zmp"].setValues(ZMPRef);
-  
+
+
   // Update position of freeflyer in global frame
-  for (int i = 0;i < 3; ++i)
-    baseff_[i*4+3] = freeFlyerPose () (i, 3);
-  for(unsigned i = 0;i < 3; ++i)
-    for(unsigned j = 0; j < 3; ++j)
-      baseff_[i * 4 + j] = freeFlyerPose () (i, j);
+  Eigen::Vector3d transq_(freeFlyerPose().translation());
+  dg::sot::VectorQuaternion qt_(freeFlyerPose().linear());
+
+  //translation
+  for(int i=0; i<3; i++) baseff_[i] = transq_(i);
+  
+  //rotation: quaternion
+  baseff_[3] = qt_.w();
+  baseff_[4] = qt_.x();
+  baseff_[5] = qt_.y();
+  baseff_[6] = qt_.z();
 
   controlOut["baseff"].setValues(baseff_);
+
   sotDEBUGOUT(25) ;
 }
 

@@ -4,8 +4,7 @@ compiler: gcc
 env:
   global:
   - APT_DEPENDENCIES="doxygen doxygen-latex libboost-all-dev libeigen3-dev liblapack-dev
-    libblas-dev gfortran python-dev python-sphinx python-numpy libbullet-dev
-    ros-hydro-angles 
+    libblas-dev gfortran python-dev python-sphinx python-numpy libbullet-dev ros-hydro-angles
     ros-hydro-common-msgs
     ros-hydro-control-msgs
     ros-hydro-realtime-tools
