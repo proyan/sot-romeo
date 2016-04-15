@@ -17,10 +17,9 @@ env:
     ros-hydro-urdfdom-py"
   - GIT_DEPENDENCIES="stack-of-tasks/pinocchio:devel
     proyan/dynamic-graph proyan/dynamic-graph-python proyan/sot-core
-    proyan/sot-tools proyan/sot-dynamic:topic/sot-pinocchio 
-    proyan/dynamic_graph_python"
-  - ROS_VERSION=hydro
-  - ROS_GIT_DEPENDENCIES="stack-of-tasks/dynamic_graph_bridge_msgs:catkin proyam/dynamic_graph_bridge:catkin laas:romeo"
+    proyan/sot-tools proyan/sot-dynamic:topic/sot-pinocchio"
+  - ROS_DISTRO=hydro
+  - ROS_GIT_DEPENDENCIES="proyan/dynamic_graph_bridge_msgs proyan/dynamic_graph_bridge"
   - ALLOW_CATKINLINT_FAILURE=true
 notifications:
   email:
@@ -28,8 +27,6 @@ notifications:
 branches:
   only:
   - master
-  - catkin
-  - travis
 script: ./.travis/run build
 after_success: ./.travis/run after_success
 after_failure: ./.travis/run after_failure
