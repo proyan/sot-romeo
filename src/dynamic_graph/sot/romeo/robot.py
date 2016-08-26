@@ -16,7 +16,7 @@
 
 from dynamic_graph.sot.dynamics.humanoid_robot import AbstractHumanoidRobot
 from dynamic_graph.ros import RosRobotModel
-
+import pinocchio as se3
 from rospkg import RosPack
 
 # Sot model for the romeo_small.urdf (with gripper, no fingers)
@@ -204,6 +204,12 @@ class Robot (AbstractHumanoidRobot):
         self.dynamic = RosRobotModel("{0}_dynamic".format(name))
         for i in self.jointMap:
             self.dynamic.addJointMapping(i, self.jointMap[i])
+
+        self.pinocchioModel = se3.buildModelFromUrdf(self.urdfDir + self.urdfName,
+                                                     se3.JointModelFreeFlyer())
+        self.pinocchioData = self.pinocchioModel.createData()
+        self.dynamic.setModel(self.pinocchioModel)
+        self.dynamic.setData(self.pinocchioData)
         self.dynamic.loadUrdf(self.urdfDir + self.urdfName)
 
         # complete feet position (TODO: move it into srdf file)
