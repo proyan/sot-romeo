@@ -39,7 +39,7 @@ FUNCTION(COMPILE_PLUGIN NAME SOURCES ENTITIES)
 ENDFUNCTION()
 
 # Compile plug-ins.
-COMPILE_PLUGIN(dynamic-romeo dynamic-romeo.cpp DynamicRomeo)
+# COMPILE_PLUGIN(dynamic-romeo dynamic-romeo.cpp DynamicRomeo)
 
 
 ## 

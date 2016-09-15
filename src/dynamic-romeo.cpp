@@ -35,7 +35,6 @@ namespace dynamicgraph
 	: Dynamic (name)
       {
 	sotDEBUGIN(15);
-	DynamicRomeo::createRobot();
 	sotDEBUGOUT(15);
       }
 
