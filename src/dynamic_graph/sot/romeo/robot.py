@@ -14,7 +14,7 @@
 # received a copy of the GNU Lesser General Public License along with
 # dynamic-graph. If not, see <http://www.gnu.org/licenses/>.
 
-from dynamic_graph.sot.dynamics.humanoid_robot import AbstractHumanoidRobot
+from dynamic_graph.sot.dynamics_pinocchio.humanoid_robot import AbstractHumanoidRobot
 from dynamic_graph.ros import RosRobotModel
 import pinocchio as se3
 from rospkg import RosPack
@@ -168,8 +168,6 @@ class Robot (AbstractHumanoidRobot):
         #0.0,
     )
 
-    jointMap = { }
-    jointMap['BODY'] = 'body'
 
     def __init__(self, name, 
                  device = None,
@@ -202,15 +200,12 @@ class Robot (AbstractHumanoidRobot):
 
         # correct the name of the body link
         self.dynamic = RosRobotModel("{0}_dynamic".format(name))
-        for i in self.jointMap:
-            self.dynamic.addJointMapping(i, self.jointMap[i])
 
         self.pinocchioModel = se3.buildModelFromUrdf(self.urdfDir + self.urdfName,
                                                      se3.JointModelFreeFlyer())
         self.pinocchioData = self.pinocchioModel.createData()
         self.dynamic.setModel(self.pinocchioModel)
         self.dynamic.setData(self.pinocchioData)
-        self.dynamic.loadUrdf(self.urdfDir + self.urdfName)
 
         # complete feet position (TODO: move it into srdf file)
         #ankle =self.dynamic.getAnklePositionInFootFrame()
